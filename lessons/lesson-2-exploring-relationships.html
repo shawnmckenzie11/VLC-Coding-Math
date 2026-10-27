@@ -1,0 +1,204 @@
+<div id="dp-wrapper" class="dp-wrapper dp-flat-sections variation-2"
+    data-header-class="dp-header dp-flat-sections variation-2"
+    data-nav-class="container-fluid dp-link-grid dp-flat-sections variation-2">
+    <header class="dp-header dp-flat-sections variation-2 cp-bg-dp-primary dp-header-bg-dp-primary">
+        <h2 class="dp-heading"><span class="dp-header-pre"><span class="dp-header-pre-1">Lesson 2</span>&nbsp;</span>
+            <span class="dp-header-title">Exploring Relationships Using Coding</span>
+        </h2>
+        <p class="dp-header-subtitle">MTH1W1</p>
+    </header>
+    <div class="dp-panels-wrapper dp-tabs">
+        <div class="dp-panel-group">
+            <h3 class="dp-panel-heading">Minds On</h3>
+            <div class="dp-panel-content">
+                <h4><span style="font-size: 24pt;">Flying Objects</span></h4>
+                <p>Imagine throwing a ball straight up in the air.</p>
+                <p style="text-align: center;"><em>How do you think the height would change over time?</em></p>
+                <p>&nbsp;</p>
+                <p>Sometimes its easier to make predictions visually: what might the graph look like if you plotted the
+                    height at different times?</p>
+                <p><img src="https://virtuallearning.instructure.com/courses/5349/files/6903978/preview" alt="image.png"
+                        width="283" height="153"
+                        data-api-endpoint="https://virtuallearning.instructure.com/api/v1/courses/5349/files/6903978"
+                        data-api-returntype="File" /></p>
+                <p style="text-align: right;">&nbsp;</p>
+            </div>
+        </div>
+        <div class="dp-panel-group">
+            <h3 class="dp-panel-heading">Action</h3>
+            <div class="dp-panel-content">
+                <h1><span style="font-size: 18pt;">Exploring Relationships Using Python</span></h1>
+                <p>As a member of the student council you've been tasked with exploring the cost of hosting the Year End
+                    Celebration (YES) for the VLC. You've found the perfect spot and are looking into the cost of the
+                    rental. After speaking to the owner you're told that the fee to rent the hall is $500 for the day,
+                    plus $10/person that attends the event.</p>
+                <p>To explore the changes in cost we are going to use an equation: the cost of the rental
+                    (<code>C</code>), in $, with <code>n</code> attendees, is given by the equation <img
+                        style="width: auto; height: auto;"
+                        src="https://www.wiris.net/instructure.com/canvas/editor/image?mmlgz=H4sIAAAAAAAAALPJTSzJUKjIzckrtlXKKCkpsNLXLy8v1ys31ssvStc3tLS00PcFKgETvj5Kdja5mXbONvpA0iY3305NucLRwBrIzQdzbeEsFIk8O0MDIDMPrDkPl2ZtZM1GBgaWCO2mBlD9%2BiDn2gEAX5dm5bUAAAA%3D"
+                        alt="C space equals space 10 n space plus thin space 500" /> .</p>
+                <p>&nbsp;</p>
+                <p><strong><span style="font-size: 14pt;">Step 1: Create Variables</span></strong></p>
+                <p>Let's create variables for cost (<code>C</code>), in dollars, and number of students <code>s</code> .
+                    Remember back to our first lesson on coding that we can use variables within Python to represent
+                    these two values. We want to calculate the costs for groups of different sizes so lets start with n
+                    = 10 (10 guests). We will use the equation above for the cost variable.</p>
+                <p><iframe title="Hall Rental Cost: C = 10n + 500 - Python editor" src="https://shawnmckenzie11.github.io/VLC-Coding-Math/mth1w-coding/l2-hall-cost.html" width="100%" height="330" loading="lazy" allowfullscreen="allowfullscreen"></iframe></p>
+                <p>Run the code above. What do you notice? Does the program "work"?</p>
+                <p>&nbsp;</p>
+                <p><strong><span style="font-size: 14pt;">Step 2: Print the Time and Height</span></strong></p>
+                <p>Although the program above does not generate any errors, notice that it doesn't <em>do anything</em>,
+                    either. To see the results of this calculation we must include a print statement. Add the following
+                    line of code to print out the cost for this number of attendees:</p>
+                <pre><code>print "For", n, "students it would cost", C, "dollars to rent the hall"</code></pre>
+                <p>&nbsp;</p>
+                <h2><strong><span style="font-size: 14pt;">Step 3: Calculating the Cost for Different Group
+                            Sizes</span></strong></h2>
+                <p>Now that we know how to find the cost for 10 students, change the value of <code>n</code> to
+                    calculate the cost for a few other party sizes.</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <h1><span style="font-size: 18pt;">Exploring the Height of a Ball Over Time</span></h1>
+                <p>Next we&rsquo;ll use Python to investigate how the height of a ball changes over time when it&rsquo;s
+                    thrown upwards. Imagine throwing a ball into the air &ndash; it rises, reaches a peak, then falls
+                    back down.</p>
+                <p>To explore the changes in height we are going to use an equation: the height of the ball
+                    (<code>h</code>), in meters, at <code>t</code> seconds after it is thrown, is given by the equation
+                    <img style="width: auto; height: auto;"
+                        src="https://www.wiris.net/instructure.com/canvas/editor/image?mmlgz=H4sIAAAAAAAAALPJTSzJUKjIzckrtlXKKCkpsNLXLy8v1ys31ssvStc3tLS00PcFKgETvj5Kdja5mXYZNvpA0iY3384WyMoHs3ShrDw7EyArDyymBxezhIoVlxaATSiBmpBnZwSR0YdK5dtpwzUZGUB1IdSjSMN0Al1mBwBnFqw3yAAAAA%3D%3D"
+                        alt="h equals negative 4.9 t squared plus 20 t plus 2" />
+                </p>
+                <p>&nbsp;</p>
+                <p><strong><span style="font-size: 14pt;">Step 1: Create Variables</span></strong></p>
+                <p>Notice in this equation there are two variables, one for time and one for height. We want to track
+                    the height at different times, so to start let's use t = 0:</p>
+                <p><iframe title="Height of a Ball: h = -4.9t² + 20t + 2 - Python editor" src="https://shawnmckenzie11.github.io/VLC-Coding-Math/mth1w-coding/l2-height-at-t0.html" width="100%" height="330" loading="lazy" allowfullscreen="allowfullscreen"></iframe></p>
+                <p>Include the following line in the code above to create the variable for height that references the
+                    time variable. Note the use of the mathematical operations from our first lesson:</p>
+                <p><code>height = -4.9 * t ** 2 + 20 * t + 2</code></p>
+                <p>&nbsp;</p>
+                <p><strong><span style="font-size: 14pt;">Step 2: Print the Time and Height</span></strong></p>
+                <p>Include a print statement in your code that prints out the time and height. Include text to include
+                    the units for each.</p>
+                <p>Take a moment to include a comment or two as well so that you can understand what each line of your
+                    code is doing.</p>
+                <p>Example:</p>
+                <pre><code># time in seconds<br />t = 0  <br /><br /># calculate height using the formula <br />height = -4.9 * t ** 2 + 20 * t + 2  
+<br />print "At t =", t, "seconds, height =", height, "meters"</code></pre>
+                <p>&nbsp;</p>
+                <h2><strong><span style="font-size: 14pt;">Step 3: Calculating Heights at Multiple Times</span></strong>
+                </h2>
+                <p>Now that we know how to find the height at 0 seconds, let&rsquo;s calculate it at different times: 1,
+                    2, 3, and 4 seconds. We&rsquo;ll repeat the steps we just did, adjusting <code>time</code> each
+                    time.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code># Calculating height at different times <br />t = 0 <br />height = -4.9 * t ** 2 + 20 * t + 2 <br />print "At t =", t, "seconds, height =", height, "meters"<br /><br />t = 1<br />height = -4.9 * t ** 2 + 20 * t + 2 <br />print "At t =", t, "seconds, height =", height, "meters"<br /><br />t = 2 <br />height = -4.9 * t ** 2 + 20 * t + 2 <br />print "At t =", t, "seconds, height =", height, "meters"<br /><br />t = 3 <br />height = -4.9 * t ** 2 + 20 * t + 2 <br />print "At t =", t, "seconds, height =", height, "meters"<br /><br />t = 4 <br />height = -4.9 * t ** 2 + 20 * t + 2 <br />print "At t =", t, "seconds, height =", height, "meters"</code></pre>
+                <p>Copy this code into the window below to observe the height at each second.</p>
+                <p><iframe title="Heights at t = 0, 1, 2, 3, 4 - Python editor" src="https://shawnmckenzie11.github.io/VLC-Coding-Math/mth1w-coding/l2-heights-repeated.html" width="100%" height="330" loading="lazy" allowfullscreen="allowfullscreen"></iframe>This method works, but notice how we&rsquo;re writing
+                    the same formula over and over. Can you think of a way to make this code more efficient?</p>
+                <p>&nbsp;</p>
+                <h2><strong><span style="font-size: 14pt;">Step 4: Introducing Loops for Efficiency</span></strong></h2>
+                <p>Instead of repeating the same lines for each time, we can use a <strong>loop</strong>. A loop lets us
+                    repeat an action without retyping the code each time. This is especially useful if we want to check
+                    the height at many time points.</p>
+                <p>In Python, the <code>for</code> loop can go through a list of times we want to calculate, like
+                    <code>0, 1, 2, 3, 4</code> seconds.
+                </p>
+                <p><strong>Example:</strong></p>
+                <pre><code># loop through each time<br />for t in [0, 1, 2, 3, 4]:  
+    height = -4.9 * t ** 2 + 20 * t + 2
+    print "At t =", t, "seconds, height =", height, "meters"<br />print "We're done!"</code></pre>
+                <p>Here, <code>for t in [0, 1, 2, 3, 4]</code> means &ldquo;for each <code>t</code> in the list [0, 1,
+                    2, 3, 4], calculate the height and print it.&rdquo; This is more efficient than writing separate
+                    lines for each time. Copy this code into the editor below to see how a loop calculates the height at
+                    each second.</p>
+                <p><iframe title="Using a Loop - Python editor" src="https://shawnmckenzie11.github.io/VLC-Coding-Math/mth1w-coding/l2-heights-loop.html" width="100%" height="330" loading="lazy" allowfullscreen="allowfullscreen"></iframe>Did you see the height and time line printed five
+                    times? If not, double check that your <strong>height...</strong> and <strong>print...</strong> lines
+                    are indented. Python uses indentation to specify what lines of code lie <em>within</em> the loop. By
+                    indenting these two lines we are telling Python to <em>execute these lines of code every time
+                        through the loop</em>. Notice that "We're done!" is only printed once to the screen since it is
+                    <em>not</em> indented (it's not inside the loop).
+                </p>
+                <p>&nbsp;</p>
+                <h2><strong><span style="font-size: 14pt;">Step 5: Going Further - Adding More Time
+                            Points</span></strong></h2>
+                <p>Now that we know how to use a loop, we can calculate the height for more times. What if we want to
+                    know the height at every half-second up to 5 seconds?</p>
+                <p>Here&rsquo;s how we can modify the loop:</p>
+                <pre><code>for t in [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]:
+    height = -4.9 * t ** 2 + 20 * t + 2
+    print "At t =", t, "seconds, height =", height, "meters"</code></pre>
+                <p><strong>Try It:</strong> Run this code to see the height at each half-second up to 5 seconds.</p>
+                <p>Use the results you&rsquo;ve found to answer the following questions:</p>
+                <ul>
+                    <li>At what time does the ball reach its maximum height? What is this height?</li>
+                    <li>How long does it take for the ball to reach the ground (height = 0)?</li>
+                </ul>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+        <div class="dp-panel-group">
+            <h3 class="dp-panel-heading">Consolidation<span
+                    style="font-size: 12pt; color: var(--bs-heading-color);">&nbsp;</span></h3>
+            <div class="dp-panel-content">
+                <h4>Practice</h4>
+                <p>1. Consider the Python program shown below, in which a company&rsquo;s profit is calculated based on
+                    the number of items sold using the equation <img style="width: auto; height: auto;"
+                        src="https://www.wiris.net/instructure.com/canvas/editor/image?mmlgz=H4sIAAAAAAAAALPJTSzJUKjIzckrtlXKKCkpsNLXLy8v1ys31ssvStc3tLS00PcFKgETvj5Kdja5mXYBNvpA0iY3305NucLRwBrIzQdzbeEsNAldKCvPzgDIygOL6cHFDKFixaUFYPPzoObn2RlBZPShUvl22nBNZiZQXQj1yPaYGJsYwDQDnW4HAImIII3pAAAA"
+                        alt="P space equals space minus 0.1 n squared plus 64 n minus 4340" /> .</p>
+                <p><img src="https://virtuallearning.instructure.com/courses/5349/files/6903960/preview" alt="image.png"
+                        width="338" height="146"
+                        data-api-endpoint="https://virtuallearning.instructure.com/api/v1/courses/5349/files/6903960"
+                        data-api-returntype="File" /></p>
+                <p>a) What are the names of the variables used in this program?</p>
+                <p>b) What operation does **2 indicate?</p>
+                <p>c) Predict the output of the program.</p>
+                <p>d) Copy the code into a Python editor and repeatedly alter the value assigned to n to determine the
+                    maximum profit for the given model (to the nearest dollar).</p>
+                <p>&nbsp;</p>
+                <p>2. A rectangle has a perimeter of 600 mm.</p>
+                <p>a) Write a Python program to determine the length of the rectangle based on its width. Use a width of
+                    100 mm, but design your program so that the width can easily be changed to calculate another length.
+                </p>
+                <p>b) Modify your program such that the rectangle&rsquo;s area is displayed along with its length.</p>
+                <p>c) Modify your program such that only the rectangle&rsquo;s area is shown, but the area calculation
+                    is done in a single line.</p>
+                <p>d) Use your program to determine the maximum area of a rectangle with a perimeter of 600 mm. What are
+                    the dimensions of this rectangle?&nbsp;</p>
+                <p><iframe title="Practice: Profit and Rectangle Programs - Python editor" src="https://shawnmckenzie11.github.io/VLC-Coding-Math/mth1w-coding/l2-practice.html" width="100%" height="360" loading="lazy" allowfullscreen="allowfullscreen"></iframe></p>
+                <p>Solutions:</p>
+                <div class="dp-panels-wrapper dp-accordion-default">
+                    <div class="dp-panel-group">
+                        <h3 class="dp-panel-heading">Question 1</h3>
+                        <div class="dp-panel-content">
+                            <p>a) n, P</p>
+                            <p>b) squaring</p>
+                            <p>c) The profit is $5860.0</p>
+                            <p>d) $5900</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dp-panels-wrapper dp-accordion-default">
+                    <div class="dp-panel-group">
+                        <h3 class="dp-panel-heading">Question 2</h3>
+                        <div class="dp-panel-content">
+                            <p>a) &amp; b)</p>
+                            <p><img src="https://virtuallearning.instructure.com/courses/5349/files/6903962/preview"
+                                    alt="image.png" width="265" height="194"
+                                    data-api-endpoint="https://virtuallearning.instructure.com/api/v1/courses/5349/files/6903962"
+                                    data-api-returntype="File" /></p>
+                            <p>c)&nbsp;</p>
+                            <p><img src="https://virtuallearning.instructure.com/courses/5349/files/6903964/preview"
+                                    alt="image.png" width="274" height="135"
+                                    data-api-endpoint="https://virtuallearning.instructure.com/api/v1/courses/5349/files/6903964"
+                                    data-api-returntype="File" /></p>
+                            <p>d) Area of 22500 mm^2 when the length is 150 mm</p>
+                        </div>
+                    </div>
+                </div>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+    </div>
+    <p>&nbsp;</p>
+</div>

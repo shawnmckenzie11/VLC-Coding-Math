@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Practice: Profit and Rectangle Programs</title>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+<style>
+body{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;margin:0;padding:10px;background:#fff;color:#222}
+h1{font-size:16px;margin:0 0 4px}.ins{font-size:14px;margin:0 0 8px}
+.wrap{display:flex;gap:8px;flex-wrap:wrap}.col{flex:1 1 300px;min-width:0}
+textarea{width:100%;box-sizing:border-box;height:220px;font:14px/1.45 Consolas,Menlo,monospace;padding:8px;border:1px solid #bbb;border-radius:6px;tab-size:4;resize:vertical;background:#fbfbfd}
+pre#out{margin:0;height:220px;overflow:auto;box-sizing:border-box;background:#1e2227;color:#e6e8ea;font:14px/1.45 Consolas,Menlo,monospace;padding:8px;border-radius:6px;white-space:pre-wrap}
+.err{color:#ff8a80}.bar{margin:8px 0;display:flex;gap:6px;flex-wrap:wrap}
+button{font-size:14px;padding:6px 14px;border-radius:6px;border:1px solid #888;background:#f2f2f2;cursor:pointer}
+button.run{background:#2e7d32;color:#fff;border-color:#2e7d32}button.chk{background:#1565c0;color:#fff;border-color:#1565c0}
+#fb{padding:8px 10px;border-radius:6px;font-size:14px;display:none}#fb.ok{display:block;background:#e8f5e9;border:1px solid #66bb6a}#fb.no{display:block;background:#fff8e1;border:1px solid #ffb300}
+#turtle{display:none;margin-top:8px}
+</style></head><body>
+<h1>Practice: Profit and Rectangle Programs</h1><p class="ins">Q1: alter the value of <code>n</code> to find the maximum profit. Q2: write your rectangle program (perimeter 600 mm) here - use variables named <code>width</code>, <code>length</code> and <code>area</code> so Check can test it.</p>
+<div class="bar"><button class="run" id="run">&#9654; Run</button><button class="chk" id="chk">&#10003; Check</button><button id="reset">&#8634; Reset</button></div>
+<div class="wrap"><div class="col"><textarea id="code" spellcheck="false" autocapitalize="off" aria-label="Python code"></textarea></div>
+<div class="col"><pre id="out" aria-label="Output" aria-live="polite"></pre></div></div>
+<div id="turtle"></div><div id="fb" role="status"></div>
+<script>
+var ID="l2-practice",STARTER="# Question 1: profit model P = -0.1n^2 + 64n - 4340\nn = 300\nP = -0.1 * n ** 2 + 64 * n - 4340\nprint \"The profit is $\" + str(P)\n";
+function CHECK(out,v,code){var nums=function(s){return (s.match(/-?\d+(?:\.\d+)?(?:e[-+]?\d+)?/gi)||[]).map(Number)};var close=function(x,y){return Math.abs(x-y)<=1e-6*Math.max(1,Math.abs(y))};
+let msgs=[], ok=false;
+if(typeof v.width==="number"){
+  if(typeof v.length!=="number"||!close(v.length,(600-2*v.width)/2)) return {ok:false,msg:"Q2: for a perimeter of 600 mm, length = (600 - 2 * width) / 2. Check your length calculation."};
+  if(typeof v.area==="number"){ if(!close(v.area,v.length*v.width)) return {ok:false,msg:"Q2: area should be length * width."}; }
+  if(!nums(out).some(x=>close(x,v.length)||(typeof v.area==="number"&&close(x,v.area)))) return {ok:false,msg:"Q2: print your result so you can see it."};
+  ok=true; msgs.push("Q2 correct: width "+v.width+" mm gives length "+v.length+" mm"+(typeof v.area==="number"?" and area "+v.area+" mm²":"")+"."+(typeof v.area==="number"&&close(v.area,22500)?" That's the maximum area!":""));
+}
+if(typeof v.n==="number"&&typeof v.P==="number"){
+  const P=-0.1*v.n*v.n+64*v.n-4340;
+  if(!close(v.P,P)) return {ok:false,msg:"Q1: P should be -0.1 * n ** 2 + 64 * n - 4340."};
+  if(!nums(out).some(x=>close(x,P))) return {ok:false,msg:"Q1: print the profit P."};
+  if(!close(P,5900)) return {ok:false,msg:(msgs.length?msgs.join(" ")+" ":"")+"Q1: profit for n = "+v.n+" is $"+(+P.toFixed(2))+". Keep changing n - can you find a bigger profit?"};
+  ok=true; msgs.push(close(P,5900)?"Q1: you found the maximum profit, $5900 (n = "+v.n+")!":"Q1: profit for n = "+v.n+" is $"+(+P.toFixed(2))+". Keep changing n - can you find a bigger profit?");
+}
+if(!ok) return {ok:false,msg:"Use the starter variables n and P (Q1), or width, length and area (Q2), so Check can test your program."};
+return {ok:true,msg:msgs.join(" ")};
+}
+var ta=document.getElementById("code"),outEl=document.getElementById("out"),fb=document.getElementById("fb"),KEY="mth1w-"+ID;
+try{ta.value=localStorage.getItem(KEY)||STARTER}catch(e){ta.value=STARTER}
+ta.addEventListener("input",function(){try{localStorage.setItem(KEY,ta.value)}catch(e){}});
+ta.addEventListener("keydown",function(e){if(e.key==="Tab"){e.preventDefault();var s=ta.selectionStart;ta.setRangeText("    ",s,ta.selectionEnd,"end")}});
+function readf(x){if(Sk.builtinFiles===undefined||Sk.builtinFiles.files[x]===undefined)throw "File not found: '"+x+"'";return Sk.builtinFiles.files[x]}
+function friendly(e){var s=e.toString();
+ if(/SyntaxError|ParseError/.test(s))s+="\nHint: check spelling, quotes \" \", brackets and colons on this line.";
+ else if(/NameError/.test(s))s+="\nHint: Python is case sensitive - is the name spelled exactly the same everywhere? Text needs quotes.";
+ else if(/IndentationError|indent/i.test(s))s+="\nHint: lines inside a loop must be indented the same amount (4 spaces).";
+ else if(/TypeError/.test(s))s+="\nHint: you may be mixing text and numbers. Use a comma in print, or str(number).";
+ return s}
+function run(){outEl.textContent="";fb.className="";var out="";var t=document.getElementById("turtle");t.innerHTML="";
+ var usesTurtle=/import\s+turtle|from\s+turtle/.test(ta.value);t.style.display=usesTurtle?"block":"none";
+ Sk.configure({__future__:Sk.python2,output:function(x){out+=x;outEl.textContent+=x},read:readf,inputfun:function(p){return window.prompt(p)},inputfunTakesPrompt:true,execLimit:10000});
+ (Sk.TurtleGraphics||(Sk.TurtleGraphics={})).target="turtle";
+ return Sk.misceval.asyncToPromise(function(){return Sk.importMainWithBody("<stdin>",false,ta.value,true)}).then(function(m){
+  var v={};Object.keys(m.$d).forEach(function(k){if(/^__/.test(k))return;try{var j=Sk.ffi.remapToJs(m.$d[k]);if(typeof j==="number"||typeof j==="string")v[k.replace(/_\$rw\$$/,"")]=j}catch(e){}});
+  return {ok:true,out:out,v:v}},function(e){var s=document.createElement("span");s.className="err";s.textContent=(out&&!/\n$/.test(out)?"\n":"")+friendly(e);outEl.appendChild(s);return {ok:false,out:out,err:e}})}
+document.getElementById("run").onclick=run;
+document.getElementById("reset").onclick=function(){if(ta.value===STARTER||confirm("Reset the code back to the starter? Your changes will be lost.")){ta.value=STARTER;try{localStorage.removeItem(KEY)}catch(e){};outEl.textContent="";fb.className=""}};
+document.getElementById("chk").onclick=function(){run().then(function(r){var res=r.ok?CHECK(r.out,r.v,ta.value):{ok:false,msg:"Your program has an error (see the output box). Fix it, then Check again."};
+ fb.textContent=(res.ok?"\u2705 ":"\uD83E\uDD14 ")+res.msg;fb.className=res.ok?"ok":"no"})};
+</script></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Using a Loop</title>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+<style>
+body{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;margin:0;padding:10px;background:#fff;color:#222}
+h1{font-size:16px;margin:0 0 4px}.ins{font-size:14px;margin:0 0 8px}
+.wrap{display:flex;gap:8px;flex-wrap:wrap}.col{flex:1 1 300px;min-width:0}
+textarea{width:100%;box-sizing:border-box;height:220px;font:14px/1.45 Consolas,Menlo,monospace;padding:8px;border:1px solid #bbb;border-radius:6px;tab-size:4;resize:vertical;background:#fbfbfd}
+pre#out{margin:0;height:220px;overflow:auto;box-sizing:border-box;background:#1e2227;color:#e6e8ea;font:14px/1.45 Consolas,Menlo,monospace;padding:8px;border-radius:6px;white-space:pre-wrap}
+.err{color:#ff8a80}.bar{margin:8px 0;display:flex;gap:6px;flex-wrap:wrap}
+button{font-size:14px;padding:6px 14px;border-radius:6px;border:1px solid #888;background:#f2f2f2;cursor:pointer}
+button.run{background:#2e7d32;color:#fff;border-color:#2e7d32}button.chk{background:#1565c0;color:#fff;border-color:#1565c0}
+#fb{padding:8px 10px;border-radius:6px;font-size:14px;display:none}#fb.ok{display:block;background:#e8f5e9;border:1px solid #66bb6a}#fb.no{display:block;background:#fff8e1;border:1px solid #ffb300}
+#turtle{display:none;margin-top:8px}
+</style></head><body>
+<h1>Using a Loop</h1><p class="ins">Copy the Step 4 loop example into the editor below to see how a loop calculates the height at each second.</p>
+<div class="bar"><button class="run" id="run">&#9654; Run</button><button class="chk" id="chk">&#10003; Check</button><button id="reset">&#8634; Reset</button></div>
+<div class="wrap"><div class="col"><textarea id="code" spellcheck="false" autocapitalize="off" aria-label="Python code"></textarea></div>
+<div class="col"><pre id="out" aria-label="Output" aria-live="polite"></pre></div></div>
+<div id="turtle"></div><div id="fb" role="status"></div>
+<script>
+var ID="l2-heights-loop",STARTER="# Paste the loop code from Step 4 here, then press Run\n\n";
+function CHECK(out,v,code){var nums=function(s){return (s.match(/-?\d+(?:\.\d+)?(?:e[-+]?\d+)?/gi)||[]).map(Number)};var close=function(x,y){return Math.abs(x-y)<=1e-6*Math.max(1,Math.abs(y))};
+const want=[0,1,2,3,4].map(t=>-4.9*t*t+20*t+2), n=nums(out);
+const miss=[0,1,2,3,4].filter((t,i)=>!n.some(x=>close(x,want[i])));
+if(!out.trim()) return {ok:false,msg:"Nothing printed yet. Paste the example code from above and press Run."};
+if(miss.length) return {ok:false,msg:"Missing (or incorrect) heights for t = "+miss.join(", ")+". Check the formula on each line."};
+if(!/\bfor\b/.test(code)) return {ok:false,msg:"The heights are right, but this step is about using a for loop. Try the Step 4 example."};
+const d=(out.match(/We're done/g)||[]).length;
+if(d>1) return {ok:false,msg:"\"We're done!\" printed "+d+" times - make sure that print line is NOT indented, so it's outside the loop."};
+return {ok:true,msg:"Your loop works! Two indented lines did the work of fifteen."};
+}
+var ta=document.getElementById("code"),outEl=document.getElementById("out"),fb=document.getElementById("fb"),KEY="mth1w-"+ID;
+try{ta.value=localStorage.getItem(KEY)||STARTER}catch(e){ta.value=STARTER}
+ta.addEventListener("input",function(){try{localStorage.setItem(KEY,ta.value)}catch(e){}});
+ta.addEventListener("keydown",function(e){if(e.key==="Tab"){e.preventDefault();var s=ta.selectionStart;ta.setRangeText("    ",s,ta.selectionEnd,"end")}});
+function readf(x){if(Sk.builtinFiles===undefined||Sk.builtinFiles.files[x]===undefined)throw "File not found: '"+x+"'";return Sk.builtinFiles.files[x]}
+function friendly(e){var s=e.toString();
+ if(/SyntaxError|ParseError/.test(s))s+="\nHint: check spelling, quotes \" \", brackets and colons on this line.";
+ else if(/NameError/.test(s))s+="\nHint: Python is case sensitive - is the name spelled exactly the same everywhere? Text needs quotes.";
+ else if(/IndentationError|indent/i.test(s))s+="\nHint: lines inside a loop must be indented the same amount (4 spaces).";
+ else if(/TypeError/.test(s))s+="\nHint: you may be mixing text and numbers. Use a comma in print, or str(number).";
+ return s}
+function run(){outEl.textContent="";fb.className="";var out="";var t=document.getElementById("turtle");t.innerHTML="";
+ var usesTurtle=/import\s+turtle|from\s+turtle/.test(ta.value);t.style.display=usesTurtle?"block":"none";
+ Sk.configure({__future__:Sk.python2,output:function(x){out+=x;outEl.textContent+=x},read:readf,inputfun:function(p){return window.prompt(p)},inputfunTakesPrompt:true,execLimit:10000});
+ (Sk.TurtleGraphics||(Sk.TurtleGraphics={})).target="turtle";
+ return Sk.misceval.asyncToPromise(function(){return Sk.importMainWithBody("<stdin>",false,ta.value,true)}).then(function(m){
+  var v={};Object.keys(m.$d).forEach(function(k){if(/^__/.test(k))return;try{var j=Sk.ffi.remapToJs(m.$d[k]);if(typeof j==="number"||typeof j==="string")v[k.replace(/_\$rw\$$/,"")]=j}catch(e){}});
+  return {ok:true,out:out,v:v}},function(e){var s=document.createElement("span");s.className="err";s.textContent=(out&&!/\n$/.test(out)?"\n":"")+friendly(e);outEl.appendChild(s);return {ok:false,out:out,err:e}})}
+document.getElementById("run").onclick=run;
+document.getElementById("reset").onclick=function(){if(ta.value===STARTER||confirm("Reset the code back to the starter? Your changes will be lost.")){ta.value=STARTER;try{localStorage.removeItem(KEY)}catch(e){};outEl.textContent="";fb.className=""}};
+document.getElementById("chk").onclick=function(){run().then(function(r){var res=r.ok?CHECK(r.out,r.v,ta.value):{ok:false,msg:"Your program has an error (see the output box). Fix it, then Check again."};
+ fb.textContent=(res.ok?"\u2705 ":"\uD83E\uDD14 ")+res.msg;fb.className=res.ok?"ok":"no"})};
+</script></body></html>
